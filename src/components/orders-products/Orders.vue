@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs10>
+    <v-flex :class="isOpenProducts ? 'xs6' : 'xs10'">
       <v-card class="mx-4 mt-1 pb-1">
         <v-card-title class="table-header">
           <v-btn
@@ -25,6 +25,7 @@
           outlined
         >
           <v-card
+            v-show="!isOpenProducts"
             class="ml-1 mr-1 item-order-field"
             width="350"
             outlined>
@@ -38,7 +39,7 @@
           <v-list-item two-line>
             <v-icon
               class="mr-1"
-              @click="showProducts"
+              @click="showProducts(order)"
             >list</v-icon>
             <v-list-item-content>
               <v-list-item-title> {{ order.productUnits }}</v-list-item-title>
@@ -60,6 +61,7 @@
             </v-list-item>
           </v-card>
           <v-card
+            v-show="!isOpenProducts"
             class="ml-1 mr-1 item-order-field"
             width="150"
             outlined>
@@ -73,6 +75,7 @@
             </v-list-item>
           </v-card>
           <v-card
+            v-show="!isOpenProducts"
             class="ml-1 mr-1 text-center item-order-field"
             width="40"
             outlined>
@@ -81,6 +84,27 @@
             </v-list-item>
           </v-card>
         </v-card>
+      </v-card>
+    </v-flex>
+    <v-flex xs6 v-show="isOpenProducts">
+      <v-card class="mx-4 mt-1 pb-1">
+          <h3 class="ml-5 headline">
+           Order
+          </h3>
+        <v-card-title class="table-header">
+          <v-btn
+            color="pink"
+            icon
+            class="pointer"
+            slot='activator'
+            tag='span'
+            @click="isOpenProducts = false">
+            <v-icon>add</v-icon>
+          </v-btn>
+          <span>Add product</span>
+        </v-card-title>
+               
+
       </v-card>
     </v-flex>
   </v-layout>
@@ -98,6 +122,8 @@ export default {
   data() {
     return {
        data: [],
+       isOpenProducts: false,
+       productsFromOrder: [],
     };
   },
   created() {
@@ -118,8 +144,10 @@ export default {
     });
   },
   methods: {
-    showProducts() {
+    showProducts(order) {
       console.log('show products');
+      this.isOpenProducts = true;
+      this.productsFromOrder = products.filter(product => product.order === order.id);
     },
     deleteOrder(item = {}) {
       console.log('delete item');
