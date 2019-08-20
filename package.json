@@ -9,13 +9,21 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "eslint-loader": "^2.2.1",
+    "express": "^4.17.1",
+    "http": "0.0.0",
     "moment": "^2.24.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "vue": "^2.6.10",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.1.2",
+    "vue-socket.io": "^2.1.1-b",
     "vuetify": "^2.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@mdi/font": "^4.0.96",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
@@ -27,6 +35,7 @@
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-moment": "^0.1.1",
     "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-socket.io": "^3.0.7",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
   },

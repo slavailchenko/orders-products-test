@@ -9,6 +9,10 @@ npm install
 ```
 npm run serve
 ```
+```
+cd server
+node index
+```
 
 ### Compiles and minifies for production
 ```

@@ -22,7 +22,6 @@ export function fixed(val) {
   return `${Number(val).toFixed(2)}`;
 }
 
-export function toImage(val) {
-  if (!val) return '../assets/no-product-image.png';
-  return val;
+export function getZeroPad(val) {
+  return (parseInt(val, 10) >= 10 ? '' : '0') + val;
 }

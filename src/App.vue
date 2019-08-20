@@ -1,18 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      <top-menu />
     </v-app-bar>
 
     <main class="main-page">
@@ -25,20 +14,46 @@
         </v-container>
       </v-content>
     </main>
+
+    <v-dialog v-model="dialog" persistent width="400">
+      <confirm-modal
+        :message="contentMessage"
+        :submit="confirmMethod" />
+    </v-dialog>
+
   </v-app>
 </template>
 
 <script>
 import NavigationMenu from './components/menu/NavigationMenu.vue';
+import TopMenu from './components/menu/TopMenu';
+import ConfirmModal from './components/modal/ConfirmModal.vue';
 
 export default {
   name: 'App',
   components: {
-    NavigationMenu,    
+    NavigationMenu,
+    TopMenu,
+    ConfirmModal,  
   },
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      dialog: false,
+      contentMessage: '',
+      confirmMethod: null,
+    }
+  },
+  mounted() {
+    this.$modal.$event.$on('modal::show', (data) => {
+      this.dialog = true;
+      Object.keys(data).forEach((key) => {
+        this[key] = data[key];
+      });
+    });
+    this.$modal.$event.$on('modal::hide', () => {
+      this.dialog = false;
+    });
+  },
 };
 </script>
 
